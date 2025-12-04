@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"main/routes"
+	"main/collection"
 	"github.com/pocketbase/pocketbase"
 	"github.com/pocketbase/pocketbase/core"
 )
@@ -14,16 +15,13 @@ func main() {
 	app.OnServe().BindFunc(func(e *core.ServeEvent) error {
 		routes.RegisterMapRoutes(app, e)
 		routes.RegisterHealthRoutes(app, e)
+
+		collection.CreateTableMarker(app)
+
 		return e.Next()
 	})
 
 	err := app.Start(); if err != nil {
 		log.Fatal(err)
 	}
-
-	label := "PRODUCTION"; mode := GetAppMode()
-	if mode == "dev" {
-		label = "DEVELOPMENT"
-	}
-	log.Printf("Running in %s mode", label)
 }

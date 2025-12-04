@@ -1,0 +1,55 @@
+{
+  "name": "your-project-name",
+  "description": "Your project description",
+  "author": {
+    "name": "Your name",
+    "email": "youremail@example.com",
+    "url": "https://github.com/yourusername"
+  },
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "server": "vite",
+    "test": "vitest",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "ts-check": "tsc -b"
+  },
+  "dependencies": {
+    "axios": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-router-dom": "latest",
+    "lucide-react": "latest",
+    "framer-motion": "latest",
+    "react-stately": "latest",
+    "zustand": "latest",
+    "zod": "latest",
+    "@heroui/react": "latest",
+    "@heroui/use-infinite-scroll": "latest",
+    "@tailwindcss/vite": "latest",
+    "@react-stately/data": "latest",
+    "@react-types/shared": "latest",
+    "@tanstack/react-query": "latest",
+    "@emotion/is-prop-valid": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "@types/react-router-dom": "latest",
+    "@tailwindcss/postcss": "latest",
+    "@vitejs/plugin-react": "latest",
+    "@testing-library/react": "latest",
+    "autoprefixer": "latest",
+    "globals": "latest",
+    "postcss": "latest",
+    "tailwindcss": "latest",
+    "vite": "latest",
+    "vitest": "latest",
+    "vite-tsconfig-paths": "latest",
+    "jsdom": "latest",
+    "typescript": "latest"
+  }
+}

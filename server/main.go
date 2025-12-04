@@ -1,51 +1,29 @@
-package main;
+package main
 
 import (
-  "os";
-  "log";
-  "github.com/pocketbase/pocketbase";
-  "github.com/pocketbase/pocketbase/core";
-  "main/routes";
-);
+	"log"
+	"main/routes"
+	"github.com/pocketbase/pocketbase"
+	"github.com/pocketbase/pocketbase/core"
+)
 
 func main() {
-  var app *pocketbase.PocketBase = pocketbase.New();
-  renderBanner(app);
+	var app *pocketbase.PocketBase = pocketbase.New()
+	RenderBanner(app)
+	app.Settings().Meta = core.MetaConfig{}
+	app.OnServe().BindFunc(func(e *core.ServeEvent) error {
+		routes.RegisterMapRoutes(app, e)
+		routes.RegisterHealthRoutes(app, e)
+		return e.Next()
+	})
 
-  app.OnServe().BindFunc(func(e *core.ServeEvent) error {
-    isDev := false;
-    for _, arg := range os.Args {
-      if arg == "--dev" {
-        isDev = true;
-      }
-    }
-    if isDev {
-      log.Println("Mode: DEVELOPMENT");
-    } else {
-      log.Println("Mode: PRODUCTION");
-    }
+	err := app.Start(); if err != nil {
+		log.Fatal(err)
+	}
 
-    routes.RegisterMapRoutes(app, e);
-    routes.RegisterHealthRoutes(app, e);
-    return e.Next();
-  });
-
-  err := app.Start(); if err != nil {
-    log.Fatal(err);
-  }
-}
-
-func renderBanner(app *pocketbase.PocketBase) {
-  app.OnBootstrap().BindFunc(func(e *core.BootstrapEvent) error {
-    log.Println(`
-░███     ░███            ░██        ░██░██████████
-░████   ░████            ░██           ░██
-░██░██ ░██░██  ░███████  ░████████  ░██░██         ░███████  ░████████   ░███████
-░██ ░████ ░██ ░██    ░██ ░██    ░██ ░██░█████████ ░██    ░██ ░██    ░██ ░██    ░██
-░██  ░██  ░██ ░██    ░██ ░██    ░██ ░██░██        ░██    ░██ ░██    ░██ ░█████████
-░██       ░██ ░██    ░██ ░███   ░██ ░██░██        ░██    ░██ ░██    ░██ ░██
-░██       ░██  ░███████  ░██░█████  ░██░██         ░███████  ░██    ░██  ░███████
-    `);
-    return e.Next();
-  });
+	label := "PRODUCTION"; mode := GetAppMode()
+	if mode == "dev" {
+		label = "DEVELOPMENT"
+	}
+	log.Printf("Running in %s mode", label)
 }

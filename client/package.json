@@ -34,7 +34,7 @@
     "@tanstack/react-query": "latest",
     "@emotion/is-prop-valid": "latest",
     "mapbox-gl": "^3.17.0",
-    "react-mapbox-gl": "^5.1.1"
+    "react-map-gl": "^8.1.0"
   },
   "devDependencies": {
     "@types/node": "latest",

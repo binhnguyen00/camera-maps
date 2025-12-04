@@ -22,11 +22,22 @@
       "vite/client"
     ],
     "paths": {
-      "@/*"           : [ "./*", "./src/*"],
-      "@pages"        : [ "./src/pages" ],
-      "@pages/*"      : [ "./src/pages/*" ],
-      "@components"   : [ "./src/components" ],
-      "@components/*" : [ "./src/components/*" ],
+      "@/*": [
+        "./*",
+        "./src/*"
+      ],
+      "@pages": [
+        "./src/pages"
+      ],
+      "@pages/*": [
+        "./src/pages/*"
+      ],
+      "@components": [
+        "./src/components"
+      ],
+      "@components/*": [
+        "./src/components/*"
+      ],
     },
   },
   "exclude": [

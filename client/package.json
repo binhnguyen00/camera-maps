@@ -1,10 +1,10 @@
 {
-  "name": "your-project-name",
-  "description": "Your project description",
+  "name": "camera-maps",
+  "description": "Camera Maps management for the Police",
   "author": {
-    "name": "Your name",
-    "email": "youremail@example.com",
-    "url": "https://github.com/yourusername"
+    "name": "Binh Nguyen",
+    "email": "jackjack2000.kahp@gmail.com",
+    "url": "https://github.com/binhnguyen00"
   },
   "version": "0.0.1",
   "type": "module",
@@ -18,30 +18,32 @@
   },
   "dependencies": {
     "axios": "latest",
-    "react": "latest",
-    "react-dom": "latest",
-    "react-router-dom": "latest",
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1",
+    "react-router-dom": "^7.10.0",
     "lucide-react": "latest",
     "framer-motion": "latest",
-    "react-stately": "latest",
+    "react-stately": "^3.42.0",
     "zustand": "latest",
     "zod": "latest",
-    "@heroui/react": "latest",
-    "@heroui/use-infinite-scroll": "latest",
+    "@heroui/react": "^2.8.5",
+    "@heroui/use-infinite-scroll": "^2.2.12",
     "@tailwindcss/vite": "latest",
-    "@react-stately/data": "latest",
-    "@react-types/shared": "latest",
+    "@react-stately/data": "^3.14.1",
+    "@react-types/shared": "^3.32.1",
     "@tanstack/react-query": "latest",
-    "@emotion/is-prop-valid": "latest"
+    "@emotion/is-prop-valid": "latest",
+    "mapbox-gl": "^3.17.0",
+    "react-mapbox-gl": "^5.1.1"
   },
   "devDependencies": {
     "@types/node": "latest",
-    "@types/react": "latest",
-    "@types/react-dom": "latest",
-    "@types/react-router-dom": "latest",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "@types/react-router-dom": "^5.3.3",
     "@tailwindcss/postcss": "latest",
-    "@vitejs/plugin-react": "latest",
-    "@testing-library/react": "latest",
+    "@vitejs/plugin-react": "^5.1.1",
+    "@testing-library/react": "^16.3.0",
     "autoprefixer": "latest",
     "globals": "latest",
     "postcss": "latest",
@@ -50,6 +52,6 @@
     "vitest": "latest",
     "vite-tsconfig-paths": "latest",
     "jsdom": "latest",
-    "typescript": "latest"
+    "typescript": "^5.9.3"
   }
 }

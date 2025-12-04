@@ -1,3 +1,7 @@
 **/node_modules
 **/dist
 **/pb_data
+**/*-lock.yaml
+**/*-lock.json
+**/.env
+**/.env.local

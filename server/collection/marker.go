@@ -1,7 +1,10 @@
 package collection
 
 import (
+	"encoding/json"
 	"main/config"
+	"os"
+
 	"github.com/pocketbase/pocketbase"
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/pocketbase/pocketbase/tools/types"
@@ -62,4 +65,34 @@ func CreateTableMarker(app *pocketbase.PocketBase) error {
 	)
 
 	return app.Save(coll);
+}
+
+func CreateSample(app *pocketbase.PocketBase) error {
+	if mode == "dev" { return nil }
+
+	datas, err := os.ReadFile("./data/cameras.json"); if err != nil {
+		return err
+	}
+	items := []map[string]string{}
+	err = json.Unmarshal(datas, &items); if err != nil {
+		return err
+	}
+
+	coll, err := app.FindCachedCollectionByNameOrId("marker"); if err != nil {
+		return err
+	}
+
+	err = app.TruncateCollection(coll); if err != nil {
+		return err
+	}
+
+	for _, camera := range items {
+		record := core.NewRecord(coll)
+		record.Set("label", camera["label"])
+		record.Set("longitude", camera["longitude"])
+		record.Set("latitude", camera["latitude"])
+		record.Set("type", camera["type"])
+		record.Set("", "")
+	}
+	return nil
 }

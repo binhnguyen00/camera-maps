@@ -11,7 +11,6 @@ import (
 func main() {
 	var app *pocketbase.PocketBase = pocketbase.New()
 	RenderBanner(app)
-	app.Settings().Meta = core.MetaConfig{}
 	app.OnServe().BindFunc(func(e *core.ServeEvent) error {
 		routes.RegisterMapRoutes(app, e)
 		routes.RegisterHealthRoutes(app, e)

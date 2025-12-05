@@ -61,16 +61,16 @@ export default function MapBox() {
   const { selectedMarker, setSelectedMarker } = useSelectedMarkerStore();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
-  const { data, isLoading, isError } = useQuery<Marker[]>({
+  const query = useQuery<Marker[]>({
     queryKey: ["cameras"],
     queryFn: async () => markersSample as Marker[]
   });
 
   const geoJsonData = useMemo(() => {
-    if (!data) return null;
+    if (!query.data) return null;
     return {
       type: "FeatureCollection" as const,
-      features: data.map((marker) => ({
+      features: query.data.map((marker) => ({
         type: "Feature" as const,
         properties: marker,
         geometry: {
@@ -79,7 +79,7 @@ export default function MapBox() {
         }
       }))
     };
-  }, [data]);
+  }, [query.data]);
 
   const handleMapClick = useCallback((event: any) => {
     const feature = event.features?.[0];
@@ -108,8 +108,8 @@ export default function MapBox() {
     }
   }, [setSelectedMarker, onOpen]);
 
-  if (isLoading) return <Spinner />;
-  if (isError || !data) return <NotFound />;
+  if (query.isLoading) return <Spinner />;
+  if (query.isError || !query.data) return <NotFound />;
 
   return (
     <DefaultLayout>

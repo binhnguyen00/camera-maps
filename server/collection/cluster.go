@@ -15,6 +15,7 @@ func CreateTableCluster(app *pocketbase.PocketBase) error {
 	coll, _ := app.FindCollectionByNameOrId(COLL_NAME)
 	if mode == "dev" {
 		if coll != nil {
+			app.TruncateCollection(coll)
 			app.Delete(coll)
 			coll = nil
 		}
@@ -33,23 +34,28 @@ func CreateTableCluster(app *pocketbase.PocketBase) error {
 
 	coll.Fields.Add(
 		&core.TextField{
-			Name:     "title",
-			Required: false,
+			Name			: "title",
+			Required	: false,
 		},
 
 		&core.EditorField{
-			Name:     "description",
-			Required: false,
+			Name			: "description",
+			Required	: false,
 		},
 
 		&core.TextField{
-			Name:     "latitude",
-			Required: false,
+			Name			: "latitude",
+			Required	: false,
 		},
 
 		&core.TextField{
-			Name:     "longitude",
-			Required: false,
+			Name			: "longitude",
+			Required	: false,
+		},
+
+		&core.NumberField{
+			Name			: "camera_count",
+			Required	: false,
 		},
 	)
 

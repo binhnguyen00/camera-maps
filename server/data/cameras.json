@@ -11,7 +11,7 @@
         "latitude": "20.85501",
         "longitude": "106.68501",
         "type": "ai",
-        "direction": "Hướng Bắc"
+        "direction": "315"
       },
       {
         "title": "Cam 1.2 - Tốc độ",
@@ -19,7 +19,7 @@
         "latitude": "20.85502",
         "longitude": "106.68502",
         "type": "speed",
-        "direction": "Hướng Đông"
+        "direction": "45"
       },
       {
         "title": "Cam 1.3 - Giám sát",
@@ -27,7 +27,7 @@
         "latitude": "20.85503",
         "longitude": "106.68503",
         "type": "overseer",
-        "direction": "Hướng Nam"
+        "direction": "135"
       },
       {
         "title": "Cam 1.4 - Chưa xác định",
@@ -35,7 +35,7 @@
         "latitude": "20.85504",
         "longitude": "106.68504",
         "type": "undefined",
-        "direction": "Hướng Tây"
+        "direction": "225"
       }
     ]
   },
@@ -51,7 +51,7 @@
         "latitude": "20.83501",
         "longitude": "106.69501",
         "type": "ai",
-        "direction": "Hướng cầu chính"
+        "direction": "180"
       },
       {
         "title": "Cam 2.2 - Giám sát",
@@ -59,7 +59,7 @@
         "latitude": "20.83502",
         "longitude": "106.69502",
         "type": "overseer",
-        "direction": "Hướng bến xe"
+        "direction": "270"
       }
     ]
   },
@@ -75,7 +75,7 @@
         "latitude": "20.86501",
         "longitude": "106.68001",
         "type": "speed",
-        "direction": "Tây Bắc"
+        "direction": "315"
       },
       {
         "title": "Cam 3.2 - Giám sát",
@@ -83,7 +83,7 @@
         "latitude": "20.86502",
         "longitude": "106.68002",
         "type": "overseer",
-        "direction": "Đông Nam"
+        "direction": "225"
       },
       {
         "title": "Cam 3.3 - AI",
@@ -91,7 +91,7 @@
         "latitude": "20.86503",
         "longitude": "106.68003",
         "type": "ai",
-        "direction": "Cổng chính"
+        "direction": "45"
       }
     ]
   },
@@ -107,7 +107,7 @@
         "latitude": "20.81501",
         "longitude": "106.71501",
         "type": "ai",
-        "direction": "Trong nhà"
+        "direction": "135"
       },
       {
         "title": "Cam 4.2 - Tốc độ",
@@ -115,7 +115,7 @@
         "latitude": "20.81502",
         "longitude": "106.71502",
         "type": "speed",
-        "direction": "Đường băng 1"
+        "direction": "225"
       },
       {
         "title": "Cam 4.3 - Giám sát",
@@ -123,7 +123,7 @@
         "latitude": "20.81503",
         "longitude": "106.71503",
         "type": "overseer",
-        "direction": "Bãi xe A"
+        "direction": "315"
       },
       {
         "title": "Cam 4.4 - Chưa xác định",
@@ -131,7 +131,7 @@
         "latitude": "20.81504",
         "longitude": "106.71504",
         "type": "undefined",
-        "direction": "Kho hàng"
+        "direction": "25"
       }
     ]
   },
@@ -147,7 +147,7 @@
         "latitude": "20.80501",
         "longitude": "106.65501",
         "type": "speed",
-        "direction": "Cổng 1"
+        "direction": "25"
       },
       {
         "title": "Cam 5.2 - Giám sát",
@@ -155,7 +155,7 @@
         "latitude": "20.80502",
         "longitude": "106.65502",
         "type": "overseer",
-        "direction": "Khu C"
+        "direction": "65"
       }
     ]
   }

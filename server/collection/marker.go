@@ -17,6 +17,7 @@ func CreateTableMarker(app *pocketbase.PocketBase) error {
 	coll, _ := app.FindCollectionByNameOrId(COLL_NAME)
 	if mode == "dev" {
 		if coll != nil {
+			app.TruncateCollection(coll)
 			app.Delete(coll)
 			coll = nil
 		}
@@ -130,11 +131,13 @@ func CreateSampleMarker(app *pocketbase.PocketBase) error {
 		cls.Set("longitude", cluster.(map[string]any)["longitude"])
 		cls.Set("latitude", cluster.(map[string]any)["latitude"])
 
+		cameras := cluster.(map[string]any)["cameras"]
+		cls.Set("camera_count", len(cameras.([]any)))
+
 		if err := app.Save(cls); err != nil {
 			return err
 		}
 
-		cameras := cluster.(map[string]any)["cameras"]
 		for _, camera := range cameras.([]any) {
 			record := core.NewRecord(markerTbl)
 			record.Set("title", camera.(map[string]any)["title"])

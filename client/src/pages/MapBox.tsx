@@ -7,13 +7,13 @@ import Map, {
   MapRef
 } from "react-map-gl/mapbox";
 import { create } from "zustand";
-import { useMemo, useRef, useState, useCallback } from "react";
+import { useMemo, useRef, useState, useCallback, useContext } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Spinner, useDisclosure } from "@heroui/react";
 import { Drawer, DrawerContent, DrawerHeader, DrawerBody } from "@heroui/react";
 
 import { NotFound } from "@pages";
-import { DefaultLayout } from "@components";
+import { DefaultLayout, PocketBaseContext } from "@components";
 
 const MAPBOX_ACCESS_TOKEN = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN;
 
@@ -47,22 +47,27 @@ const useSelectedMarkerStore = create<SelectedMarkerState>((set) => ({
 
 export default function MapBox() {
   const mapRef = useRef<MapRef>(null);
+  const pocketbase = useContext(PocketBaseContext);
+
   const [isMapLoaded, setIsMapLoaded] = useState(false);
   const [cursor, setCursor] = useState("default");
 
   const { selectedMarker, setSelectedMarker } = useSelectedMarkerStore();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
-  const query = useQuery<any[]>({
-    queryKey: ["cameras"],
-    queryFn: async () => [] as any[]
+  const clusterQuery = useQuery<any[]>({
+    queryKey: ["clusters"],
+    queryFn: async () => {
+      const cameras = await pocketbase.client.collection("cluster").getFullList();
+      return cameras;
+    }
   });
 
   const geoJsonData = useMemo(() => {
-    if (!query.data) return null;
+    if (!clusterQuery.data) return null;
     return {
       type: "FeatureCollection" as const,
-      features: query.data.map((marker) => ({
+      features: clusterQuery.data.map((marker) => ({
         type: "Feature" as const,
         properties: marker,
         geometry: {
@@ -71,7 +76,7 @@ export default function MapBox() {
         }
       }))
     };
-  }, [query.data]);
+  }, [clusterQuery.data]);
 
   const handleMapClick = useCallback((event: any) => {
     const feature = event.features?.[0];
@@ -100,8 +105,8 @@ export default function MapBox() {
     }
   }, [setSelectedMarker, onOpen]);
 
-  if (query.isLoading) return <Spinner />;
-  if (query.isError || !query.data) return <NotFound />;
+  if (clusterQuery.isLoading) return <Spinner />;
+  if (clusterQuery.isError || !clusterQuery.data) return <NotFound />;
 
   return (
     <DefaultLayout>
@@ -111,6 +116,15 @@ export default function MapBox() {
         initialViewState={INITIAL_VIEW_STATE}
         style={{ width: "100vw", height: "100vh" }}
         mapStyle="mapbox://styles/mapbox/standard"
+        config={{
+          basemap: {
+            showPlaceLabels: false,
+            showPointOfInterestLabels: false,
+            showTransitLabels: false,
+            show3dObjects: false,
+            showLandmarkIconLabels: false
+          }
+        }}
         interactiveLayerIds={["clusters", "unclustered-point"]}
         onLoad={() => setIsMapLoaded(true)}
         onClick={handleMapClick}

@@ -33,6 +33,7 @@
     "@react-types/shared": "^3.32.1",
     "@tanstack/react-query": "latest",
     "@emotion/is-prop-valid": "latest",
+    "pocketbase": "^0.26.5",
     "mapbox-gl": "^3.17.0",
     "react-map-gl": "^8.1.0"
   },

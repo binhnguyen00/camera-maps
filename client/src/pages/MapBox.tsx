@@ -14,7 +14,6 @@ import { Drawer, DrawerContent, DrawerHeader, DrawerBody } from "@heroui/react";
 
 import { NotFound } from "@pages";
 import { DefaultLayout } from "@components";
-import markersSample from "@/sample/markers.json";
 
 const MAPBOX_ACCESS_TOKEN = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN;
 
@@ -36,16 +35,9 @@ const CIRCLE_COLORS = {
   default: "red"
 };
 
-interface Marker {
-  latitude: number;
-  longitude: number;
-  label: string;
-  type: string;
-}
-
 interface SelectedMarkerState {
-  selectedMarker: Marker | null;
-  setSelectedMarker: (marker: Marker | null) => void;
+  selectedMarker: any;
+  setSelectedMarker: (marker: any) => void;
 }
 
 const useSelectedMarkerStore = create<SelectedMarkerState>((set) => ({
@@ -61,9 +53,9 @@ export default function MapBox() {
   const { selectedMarker, setSelectedMarker } = useSelectedMarkerStore();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
-  const query = useQuery<Marker[]>({
+  const query = useQuery<any[]>({
     queryKey: ["cameras"],
-    queryFn: async () => markersSample as Marker[]
+    queryFn: async () => [] as any[]
   });
 
   const geoJsonData = useMemo(() => {

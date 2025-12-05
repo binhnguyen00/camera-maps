@@ -7,16 +7,18 @@ import (
 
 	"github.com/pocketbase/pocketbase"
 	"github.com/pocketbase/pocketbase/core"
-	"github.com/pocketbase/pocketbase/tools/types"
+	// "github.com/pocketbase/pocketbase/tools/types"
 )
 
-var COLL_NAME string = "marker"
-var mode string = config.GetAppMode()
-
 func CreateTableMarker(app *pocketbase.PocketBase) error {
-	coll, _ := app.FindCollectionByNameOrId(COLL_NAME); if mode == "dev" {
+	COLL_NAME := "marker"
+	mode := config.GetAppMode()
+
+	coll, _ := app.FindCollectionByNameOrId(COLL_NAME)
+	if mode == "dev" {
 		if coll != nil {
 			app.Delete(coll)
+			coll = nil
 		}
 	}
 
@@ -24,12 +26,11 @@ func CreateTableMarker(app *pocketbase.PocketBase) error {
 		return nil
 	}
 
-	coll = core.NewBaseCollection(COLL_NAME);
-	coll.ViewRule = types.Pointer("@request.auth.id != ''");
-	coll.ListRule = types.Pointer("@request.auth.id != ''");
-	coll.CreateRule = types.Pointer("@request.auth.id != ''");
-	coll.UpdateRule = types.Pointer("@request.auth.id != ''");
-	coll.DeleteRule = types.Pointer("@request.auth.id != ''");
+	coll = core.NewBaseCollection(COLL_NAME)
+	clusterColl, err := app.FindCollectionByNameOrId("cluster")
+	if err != nil {
+		return err
+	}
 
 	coll.Fields.Add(
 		&core.TextField{
@@ -52,47 +53,97 @@ func CreateTableMarker(app *pocketbase.PocketBase) error {
 			Required	: false,
 		},
 
-		&core.AutodateField{
-			Name      : "created",
-			OnCreate  : true,
+		&core.SelectField{
+			Name			: "type",
+			Required	: false,
+			Values		: []string{"ai", "speed", "overseer", "undefined"},
+		},
+
+		&core.TextField{
+			Name			: "direction",
+			Required	: false,
+		},
+
+		&core.RelationField{
+			Name					: "cluster_id",
+			CollectionId	: clusterColl.Id,
+			MaxSelect			: 1,
+			Required			: false,
 		},
 
 		&core.AutodateField{
-			Name      : "updated",
-			OnCreate  : true,
-			OnUpdate  : true,
+			Name			: "created",
+			OnCreate	: true,
+		},
+
+		&core.AutodateField{
+			Name			: "updated",
+			OnCreate	: true,
+			OnUpdate	: true,
 		},
 	)
 
-	return app.Save(coll);
+	return app.Save(coll)
 }
 
-func CreateSample(app *pocketbase.PocketBase) error {
-	if mode == "dev" { return nil }
-
-	datas, err := os.ReadFile("./data/cameras.json"); if err != nil {
-		return err
-	}
-	items := []map[string]string{}
-	err = json.Unmarshal(datas, &items); if err != nil {
-		return err
+func CreateSampleMarker(app *pocketbase.PocketBase) error {
+	mode := config.GetAppMode()
+	if mode != "dev" {
+		return nil
 	}
 
-	coll, err := app.FindCachedCollectionByNameOrId("marker"); if err != nil {
+	datas, err := os.ReadFile("./data/cameras.json")
+	if err != nil {
 		return err
 	}
 
-	err = app.TruncateCollection(coll); if err != nil {
+	items := []any{}
+	err = json.Unmarshal(datas, &items)
+	if err != nil {
 		return err
 	}
 
-	for _, camera := range items {
-		record := core.NewRecord(coll)
-		record.Set("label", camera["label"])
-		record.Set("longitude", camera["longitude"])
-		record.Set("latitude", camera["latitude"])
-		record.Set("type", camera["type"])
-		record.Set("", "")
+	clusterTbl, err := app.FindCachedCollectionByNameOrId("cluster")
+	if err != nil {
+		return err
 	}
+	markerTbl, err := app.FindCachedCollectionByNameOrId("marker")
+	if err != nil {
+		return err
+	}
+
+	err = app.TruncateCollection(markerTbl)
+	if err != nil {
+		return err
+	}
+
+	for _, cluster := range items {
+		cls := core.NewRecord(clusterTbl)
+		cls.Set("title", cluster.(map[string]any)["title"])
+		cls.Set("description", cluster.(map[string]any)["description"])
+		cls.Set("longitude", cluster.(map[string]any)["longitude"])
+		cls.Set("latitude", cluster.(map[string]any)["latitude"])
+
+		if err := app.Save(cls); err != nil {
+			return err
+		}
+
+		cameras := cluster.(map[string]any)["cameras"]
+		for _, camera := range cameras.([]any) {
+			record := core.NewRecord(markerTbl)
+			record.Set("title", camera.(map[string]any)["title"])
+			record.Set("description", camera.(map[string]any)["description"])
+			record.Set("longitude", camera.(map[string]any)["longitude"])
+			record.Set("latitude", camera.(map[string]any)["latitude"])
+			record.Set("type", camera.(map[string]any)["type"])
+			record.Set("direction", camera.(map[string]any)["direction"])
+			record.Set("cluster_id", cls.Id)
+
+			if err := app.Save(record); err != nil {
+				return err
+			}
+		}
+	}
+
 	return nil
 }

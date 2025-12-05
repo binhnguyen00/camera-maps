@@ -1,72 +1,162 @@
 [
   {
-    "title": "Camera 1",
-    "description": "Hướng Lạch Chay tới Phạm Văn Đồng",
-    "longitude": "106.6976",
-    "latitude": "20.8185",
-    "type": "speed"
+    "title": "Cụm 1 - Ngã tư Lạch Chay",
+    "description": "Khu vực giao thông trọng điểm",
+    "latitude": "20.8550",
+    "longitude": "106.6850",
+    "cameras": [
+      {
+        "title": "Cam 1.1 - AI",
+        "description": "Nhận diện biển số",
+        "latitude": "20.85501",
+        "longitude": "106.68501",
+        "type": "ai",
+        "direction": "Hướng Bắc"
+      },
+      {
+        "title": "Cam 1.2 - Tốc độ",
+        "description": "Đo tốc độ làn 1",
+        "latitude": "20.85502",
+        "longitude": "106.68502",
+        "type": "speed",
+        "direction": "Hướng Đông"
+      },
+      {
+        "title": "Cam 1.3 - Giám sát",
+        "description": "Toàn cảnh ngã tư",
+        "latitude": "20.85503",
+        "longitude": "106.68503",
+        "type": "overseer",
+        "direction": "Hướng Nam"
+      },
+      {
+        "title": "Cam 1.4 - Chưa xác định",
+        "description": "Camera dự phòng",
+        "latitude": "20.85504",
+        "longitude": "106.68504",
+        "type": "undefined",
+        "direction": "Hướng Tây"
+      }
+    ]
   },
   {
-    "title": "Camera 2",
-    "description": "Hướng Lạch Chay tới Phạm Văn Đồng",
-    "longitude": "106.6975",
-    "latitude": "20.8184",
-    "type": "ai"
+    "title": "Cụm 2 - Cầu Rào",
+    "description": "Cửa ngõ ra vào thành phố",
+    "latitude": "20.8350",
+    "longitude": "106.6950",
+    "cameras": [
+      {
+        "title": "Cam 2.1 - AI",
+        "description": "Đếm lưu lượng xe",
+        "latitude": "20.83501",
+        "longitude": "106.69501",
+        "type": "ai",
+        "direction": "Hướng cầu chính"
+      },
+      {
+        "title": "Cam 2.2 - Giám sát",
+        "description": "Khu vực dưới gầm cầu",
+        "latitude": "20.83502",
+        "longitude": "106.69502",
+        "type": "overseer",
+        "direction": "Hướng bến xe"
+      }
+    ]
   },
   {
-    "title": "Camera 3",
-    "description": "Hướng Lạch Chay tới Phạm Văn Đồng",
-    "longitude": "106.6977",
-    "latitude": "20.8186",
-    "type": "overseer"
+    "title": "Cụm 3 - Nhà hát lớn",
+    "description": "Khu vực trung tâm hành chính",
+    "latitude": "20.8650",
+    "longitude": "106.6800",
+    "cameras": [
+      {
+        "title": "Cam 3.1 - Tốc độ",
+        "description": "Tốc độ đường Quang Trung",
+        "latitude": "20.86501",
+        "longitude": "106.68001",
+        "type": "speed",
+        "direction": "Tây Bắc"
+      },
+      {
+        "title": "Cam 3.2 - Giám sát",
+        "description": "Quảng trường",
+        "latitude": "20.86502",
+        "longitude": "106.68002",
+        "type": "overseer",
+        "direction": "Đông Nam"
+      },
+      {
+        "title": "Cam 3.3 - AI",
+        "description": "Nhận diện khuôn mặt",
+        "latitude": "20.86503",
+        "longitude": "106.68003",
+        "type": "ai",
+        "direction": "Cổng chính"
+      }
+    ]
   },
   {
-    "title": "Camera 4",
-    "description": "Hướng Lạch Chay tới Phạm Văn Đồng",
-    "longitude": "106.6974",
-    "latitude": "20.8183",
-    "type": "undefined"
+    "title": "Cụm 4 - Sân bay Cát Bi",
+    "description": "Khu vực an ninh cao",
+    "latitude": "20.8150",
+    "longitude": "106.7150",
+    "cameras": [
+      {
+        "title": "Cam 4.1 - AI",
+        "description": "An ninh sảnh chờ",
+        "latitude": "20.81501",
+        "longitude": "106.71501",
+        "type": "ai",
+        "direction": "Trong nhà"
+      },
+      {
+        "title": "Cam 4.2 - Tốc độ",
+        "description": "Đường băng",
+        "latitude": "20.81502",
+        "longitude": "106.71502",
+        "type": "speed",
+        "direction": "Đường băng 1"
+      },
+      {
+        "title": "Cam 4.3 - Giám sát",
+        "description": "Bãi đỗ xe",
+        "latitude": "20.81503",
+        "longitude": "106.71503",
+        "type": "overseer",
+        "direction": "Bãi xe A"
+      },
+      {
+        "title": "Cam 4.4 - Chưa xác định",
+        "description": "Bảo trì",
+        "latitude": "20.81504",
+        "longitude": "106.71504",
+        "type": "undefined",
+        "direction": "Kho hàng"
+      }
+    ]
   },
   {
-    "title": "Camera 5",
-    "description": "Hướng Lạch Chay tới Phạm Văn Đồng",
-    "longitude": "106.6978",
-    "latitude": "20.8182",
-    "type": "speed"
-  },
-  {
-    "title": "Camera 6",
-    "description": "Hướng Lạch Chay tới Phạm Văn Đồng",
-    "longitude": "106.6973",
-    "latitude": "20.8187",
-    "type": "speed"
-  },
-  {
-    "title": "Camera 7",
-    "description": "Hướng Lạch Chay tới Phạm Văn Đồng",
-    "longitude": "106.6979",
-    "latitude": "20.8181",
-    "type": "ai"
-  },
-  {
-    "title": "Camera 8",
-    "description": "Hướng Lạch Chay tới Phạm Văn Đồng",
-    "longitude": "106.6972",
-    "latitude": "20.8188",
-    "type": "ai"
-  },
-  {
-    "title": "Camera 9",
-    "description": "Hướng Lạch Chay tới Phạm Văn Đồng",
-    "longitude": "106.69765",
-    "latitude": "20.81855",
-    "type": "overseer"
-  },
-  {
-    "title": "Camera 10",
-    "description": "Hướng Lạch Chay tới Phạm Văn Đồng",
-    "longitude": "106.69755",
-    "latitude": "20.81845",
-    "type": "overseer"
+    "title": "Cụm 5 - Khu công nghiệp",
+    "description": "Khu vực sản xuất",
+    "latitude": "20.8050",
+    "longitude": "106.6550",
+    "cameras": [
+      {
+        "title": "Cam 5.1 - Tốc độ",
+        "description": "Đường trục chính",
+        "latitude": "20.80501",
+        "longitude": "106.65501",
+        "type": "speed",
+        "direction": "Cổng 1"
+      },
+      {
+        "title": "Cam 5.2 - Giám sát",
+        "description": "Khu xử lý thải",
+        "latitude": "20.80502",
+        "longitude": "106.65502",
+        "type": "overseer",
+        "direction": "Khu C"
+      }
+    ]
   }
 ]

@@ -15,7 +15,9 @@ func main() {
 		routes.RegisterMapRoutes(app, e)
 		routes.RegisterHealthRoutes(app, e)
 
+		collection.CreateTableCluster(app)
 		collection.CreateTableMarker(app)
+		collection.CreateSampleMarker(app)
 
 		return e.Next()
 	})

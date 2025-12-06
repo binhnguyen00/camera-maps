@@ -24,13 +24,13 @@ export default function viteConfig() {
       port: 2999,
       open: false,
       host: "0.0.0.0",
-      allowedHosts: [".trycloudflare.*", "binh.qzz.io"]
+      allowedHosts: true
     },
     preview: {
       port: 2999,
       open: false,
       host: "0.0.0.0",
-      allowedHosts: [".trycloudflare.*", "binh.qzz.io"]
+      allowedHosts: true
     }
   })
 }

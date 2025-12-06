@@ -30,18 +30,6 @@ services:
     networks:
       - camera-maps-network
 
-  cloudflared:
-    image: cloudflare/cloudflared:latest
-    container_name: camera-maps-cloudflared
-    command: tunnel --no-autoupdate run --token ${CLOUDFLARED_TOKEN}
-    environment:
-      - CLOUDFLARED_TOKEN=${CLOUDFLARED_TOKEN}
-    depends_on:
-      - client
-    restart: unless-stopped
-    networks:
-      - camera-maps-network
-
 networks:
   camera-maps-network:
     driver: bridge

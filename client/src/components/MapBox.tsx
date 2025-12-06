@@ -13,14 +13,14 @@ import { Spinner, useDisclosure } from "@heroui/react";
 import { Drawer, DrawerContent, DrawerHeader, DrawerBody } from "@heroui/react";
 
 import { NotFound } from "@pages";
-import { DefaultLayout, PocketBaseContext } from "@components";
+import { PocketBaseContext } from "@components";
 
 const MAPBOX_ACCESS_TOKEN = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN;
 
 const INITIAL_VIEW_STATE = {
   longitude: 106.6975945,
   latitude: 20.8184965,
-  zoom: 12
+  zoom: 11
 };
 
 const CIRCLE_COLORS = {
@@ -192,12 +192,13 @@ export default function MapBox() {
   }
 
   return (
-    <DefaultLayout>
+    <div className="w-full h-full">
       <Map
         ref={mapRef}
         mapboxAccessToken={MAPBOX_ACCESS_TOKEN}
         initialViewState={INITIAL_VIEW_STATE}
-        style={{ width: "100vw", height: "100vh" }}
+        style={{ width: "100%", height: "100%" }}
+        customAttribution={"MobiFone"}
         mapStyle="mapbox://styles/mapbox/standard"
         config={{
           basemap: {
@@ -395,6 +396,6 @@ export default function MapBox() {
           </DrawerContent>
         </Drawer>
       )}
-    </DefaultLayout>
+    </div>
   );
 }

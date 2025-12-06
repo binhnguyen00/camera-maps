@@ -32,9 +32,10 @@ RUN npm install -g pnpm
 
 WORKDIR /app
 
-# Copy built assets from builder
+# Copy built assets and config from builder
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/package.json ./
+COPY --from=builder /app/vite.config.ts ./
 
 # Install only production dependencies for preview server
 RUN pnpm install

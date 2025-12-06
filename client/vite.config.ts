@@ -4,7 +4,6 @@ import tsconfigPaths from "vite-tsconfig-paths";
 import tailwindcss from "@tailwindcss/vite";
 
 import { defineConfig } from "vite";
-import { hostname } from "os";
 
 export default function viteConfig() {
   return defineConfig({

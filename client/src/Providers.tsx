@@ -13,7 +13,11 @@ declare module "@react-types/shared" {
 }
 
 const queryClient = new QueryClient();
-const pocketBaseClient = new PocketBase("http://127.0.0.1:8090")
+const pocketBaseClient = new PocketBase(
+  import.meta.env.MODE === "production"
+    ? "https://api.binh.qzz.io"
+    : "http://127.0.0.1:8090"
+)
 
 export function Providers({ children }: { children: React.ReactNode }) {
   const navigate = useNavigate();

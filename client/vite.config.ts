@@ -22,13 +22,13 @@ export default function viteConfig() {
     },
     server: {
       port: 2999,
-      open: true,
-      host: true
+      open: false,
+      host: "0.0.0.0"
     },
     preview: {
       port: 2999,
-      open: true,
-      host: true
+      open: false,
+      host: "0.0.0.0"
     }
   })
 }

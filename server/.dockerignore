@@ -1,0 +1,9 @@
+pb_data
+.git
+.gitignore
+*.md
+.env
+.vscode
+.idea
+*.log
+.DS_Store

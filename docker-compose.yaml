@@ -1,0 +1,47 @@
+services:
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: camera-maps-server
+    ports:
+      - "8090:8090"
+    volumes:
+      - ./server/pb_data:/app/pb_data
+    environment:
+      - TZ=Asia/Bangkok
+    restart: unless-stopped
+    networks:
+      - camera-maps-network
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: camera-maps-client
+    ports:
+      - "2999:2999"
+    environment:
+      - NODE_ENV=production
+      - VITE_MAPBOX_ACCESS_TOKEN=${MAPBOX_ACCESS_TOKEN}
+    depends_on:
+      - server
+    restart: unless-stopped
+    networks:
+      - camera-maps-network
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: camera-maps-cloudflared
+    command: tunnel --no-autoupdate run
+    environment:
+      - TUNNEL_TOKEN=${CLOUDFLARED_TOKEN}
+    depends_on:
+      - client
+    restart: unless-stopped
+    networks:
+      - camera-maps-network
+
+networks:
+  camera-maps-network:
+    driver: bridge

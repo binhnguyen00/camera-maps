@@ -13,7 +13,7 @@
     "server": "vite",
     "test": "vitest",
     "build": "tsc -b && vite build",
-    "preview": "vite preview",
+    "preview": "vite preview --host --port 2999",
     "ts-check": "tsc -b"
   },
   "dependencies": {

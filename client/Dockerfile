@@ -1,6 +1,12 @@
 # Build stage
 FROM node:20-alpine AS builder
 
+# Declare build argument
+ARG VITE_MAPBOX_ACCESS_TOKEN
+
+# Set as environment variable for build
+ENV VITE_MAPBOX_ACCESS_TOKEN=$VITE_MAPBOX_ACCESS_TOKEN
+
 # Install pnpm
 RUN npm install -g pnpm
 

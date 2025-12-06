@@ -4,6 +4,7 @@ import tsconfigPaths from "vite-tsconfig-paths";
 import tailwindcss from "@tailwindcss/vite";
 
 import { defineConfig } from "vite";
+import { hostname } from "os";
 
 export default function viteConfig() {
   return defineConfig({
@@ -22,12 +23,12 @@ export default function viteConfig() {
     server: {
       port: 2999,
       open: true,
-      allowedHosts: [".trycloudflare.com", "binh.qzz.io"]
+      host: true
     },
     preview: {
       port: 2999,
       open: true,
-      allowedHosts: [".trycloudflare.com", "binh.qzz.io"]
+      host: true
     }
   })
 }

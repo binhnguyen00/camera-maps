@@ -44,7 +44,7 @@ const useSelectedItemStore = create<SelectedItemState>((set) => ({
   setSelectedItem: (item, type) => set({ selectedItem: item, itemType: type })
 }));
 
-export default function MapBox() {
+export default function MapBoxGL() {
   const mapRef = useRef<MapRef>(null);
   const pocketbase = useContext(PocketBaseContext);
 
@@ -138,15 +138,13 @@ export default function MapBox() {
     }
   }, []);
 
-  // Create and add custom arrow image to the map
+  // Draw vision cone (like FOV in games)
   useEffect(() => {
     const map = mapRef.current?.getMap();
     if (!map || !isMapLoaded) return;
 
-    // Check if image already exists
     if (map.hasImage("direction-arrow")) return;
 
-    // Create a canvas to draw the arrow
     const size = 64;
     const canvas = document.createElement("canvas");
     canvas.width = size;
@@ -157,31 +155,32 @@ export default function MapBox() {
       const centerX = size / 2;
       const centerY = size / 2;
 
-      // Draw an arrow pointing upward (0 degrees = North)
-      ctx.fillStyle = "#FF0000";
-      ctx.strokeStyle = "#FFFFFF";
-      ctx.lineWidth = 3;
+      const coneAngle = Math.PI / 3; // 60 degrees
+      const coneLength = size * 0.4;
 
-      // Draw a more visible arrow/triangle
+      ctx.fillStyle = "rgba(255, 255, 0, 0.4)"; // Semi-transparent yellow
+      ctx.strokeStyle = "#FFD700";
+      ctx.lineWidth = 2;
+
       ctx.beginPath();
-      ctx.moveTo(centerX, size * 0.15); // Top point (pointing up/north)
-      ctx.lineTo(centerX - size * 0.25, size * 0.6); // Bottom left
-      ctx.lineTo(centerX, size * 0.5); // Middle notch
-      ctx.lineTo(centerX + size * 0.25, size * 0.6); // Bottom right
+      ctx.moveTo(centerX, centerY);
+      ctx.arc(
+        centerX,
+        centerY,
+        coneLength,
+        -Math.PI / 2 - coneAngle / 2,
+        -Math.PI / 2 + coneAngle / 2
+      );
       ctx.closePath();
       ctx.fill();
       ctx.stroke();
 
-      // Add a small circle at the base to show camera position
+      // Draw center dot (player position)
       ctx.beginPath();
-      ctx.arc(centerX, centerY, 4, 0, Math.PI * 2);
-      ctx.fillStyle = "#FFFFFF";
+      ctx.arc(centerX, centerY, 3, 0, Math.PI * 2);
+      ctx.fillStyle = "#FF0000";
       ctx.fill();
-      ctx.strokeStyle = "#000000";
-      ctx.lineWidth = 1;
-      ctx.stroke();
 
-      // Add the image to the map
       map.addImage("direction-arrow", ctx.getImageData(0, 0, size, size));
     }
   }, [isMapLoaded]);
@@ -317,14 +316,10 @@ export default function MapBox() {
                 "circle-color": [
                   "match",
                   ["get", "type"],
-                  "overseer",
-                  CIRCLE_COLORS.overseer,
-                  "ai",
-                  CIRCLE_COLORS.ai,
-                  "speed",
-                  CIRCLE_COLORS.speed,
-                  "undefined",
-                  CIRCLE_COLORS.undefined,
+                  "overseer", CIRCLE_COLORS.overseer,
+                  "ai", CIRCLE_COLORS.ai,
+                  "speed", CIRCLE_COLORS.speed,
+                  "undefined", CIRCLE_COLORS.undefined,
                   CIRCLE_COLORS.default
                 ],
                 "circle-radius": 8,

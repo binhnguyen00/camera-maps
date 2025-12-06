@@ -31,7 +31,7 @@ COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/package.json ./
 
 # Install only production dependencies for preview server
-RUN pnpm install --frozen-lockfile
+RUN pnpm install
 
 # Expose port for Vite preview
 EXPOSE 2999

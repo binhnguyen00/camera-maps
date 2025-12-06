@@ -185,9 +185,20 @@ export default function MapBoxGL() {
     }
   }, [isMapLoaded]);
 
-  if (clusterQuery.isLoading || markerQuery.isLoading) return <Spinner />;
+  if (clusterQuery.isLoading || markerQuery.isLoading) {
+    return (
+      <div className="w-full h-full flex justify-center items-center">
+        <Spinner />
+      </div>
+    )
+  }
+
   if (clusterQuery.isError || markerQuery.isError || !clusterQuery.data || !markerQuery.data) {
-    return <NotFound />;
+    return (
+      <div className="w-full h-full flex justify-center items-center">
+        <NotFound />
+      </div>
+    );
   }
 
   return (

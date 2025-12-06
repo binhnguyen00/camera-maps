@@ -18,12 +18,13 @@ services:
     build:
       context: ./client
       dockerfile: Dockerfile
+      args:
+        - VITE_MAPBOX_ACCESS_TOKEN=${MAPBOX_ACCESS_TOKEN}
     container_name: camera-maps-client
     ports:
       - "2999:2999"
     environment:
       - NODE_ENV=production
-      - VITE_MAPBOX_ACCESS_TOKEN=${MAPBOX_ACCESS_TOKEN}
     depends_on:
       - server
     restart: unless-stopped
